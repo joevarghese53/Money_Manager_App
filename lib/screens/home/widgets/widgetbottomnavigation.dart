@@ -11,17 +11,22 @@ class Bottomnavigation extends StatelessWidget {
       valueListenable: Homescreen.selectedindexnotifier,
       builder: (context, value, child) {
         return BottomNavigationBar(
-            selectedItemColor: Colors.purple,
-            currentIndex: value,
-            onTap: (newindex) {
-              Homescreen.selectedindexnotifier.value = newindex;
-            },
-            items: const [
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.home), label: 'transactions'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.category), label: 'category')
-            ]);
+          selectedItemColor: Colors.purple,
+          currentIndex: value,
+          onTap: (newindex) {
+            Homescreen.selectedindexnotifier.value = newindex;
+          },
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Transactions',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.category),
+              label: 'Category',
+            ),
+          ],
+        );
       },
     );
   }

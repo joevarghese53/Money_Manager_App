@@ -10,17 +10,28 @@ ValueNotifier<Categorytype> selectedvaluenotifier = ValueNotifier(
 );
 
 Future<void> showcategoryaddpopup(context) async {
-  final _nameeditingcontroller = TextEditingController();
+  final nameeditingcontroller = TextEditingController();
   showDialog(
     context: context,
     builder: (context) {
       return SimpleDialog(
-        title: const Text('Add Category'),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            const Text('Add Category'),
+            IconButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              icon: const Icon(Icons.close),
+            ),
+          ],
+        ),
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextFormField(
-              controller: _nameeditingcontroller,
+              controller: nameeditingcontroller,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 hintText: 'Add Something',
@@ -40,17 +51,17 @@ Future<void> showcategoryaddpopup(context) async {
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
               onPressed: () {
-                final _name = _nameeditingcontroller.text;
-                if (_name.isEmpty) {
+                final name = nameeditingcontroller.text;
+                if (name.isEmpty) {
                   return;
                 }
-                final _type = selectedvaluenotifier.value;
-                final _category = Categorymodel(
+                final type = selectedvaluenotifier.value;
+                final category = Categorymodel(
                   id: DateTime.now().millisecondsSinceEpoch.toString(),
-                  name: _name,
-                  type: _type,
+                  name: name,
+                  type: type,
                 );
-                Categoryfunctions.instance.insertcategory(_category);
+                Categoryfunctions.instance.insertcategory(category);
                 Navigator.of(context).pop();
               },
               child: const Text('Add'),

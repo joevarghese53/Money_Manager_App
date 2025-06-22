@@ -16,24 +16,50 @@ class Homescreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         appBar: AppBar(
-          title: const Text('MONEY MANAGER'),
-          centerTitle: true,
+          title: const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Money Manager'),
+              Text('Track your finances', style: TextStyle(fontSize: 12)),
+            ],
+          ),
+          actions: [
+            const Padding(
+              padding: EdgeInsets.only(right: 8.0),
+              child: CircleAvatar(
+                radius: 20,
+                backgroundImage: AssetImage('assets/user.png'),
+              ),
+            ),
+          ],
         ),
         bottomNavigationBar: const Bottomnavigation(),
-        body: ValueListenableBuilder(
-          valueListenable: selectedindexnotifier,
-          builder: (context, value, child) {
-            return pages[value];
-          },
+        body: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Color(0xFF0f172a), Color(0xFF1e293b), Color(0xFF0f172a)],
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+            ),
+          ),
+          child: ValueListenableBuilder(
+            valueListenable: selectedindexnotifier,
+            builder: (context, value, child) {
+              return pages[value];
+            },
+          ),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {
             if (selectedindexnotifier.value == 0) {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return const screenaddtransactions();
-              }));
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) {
+                    return const ScreenAddTransactions();
+                  },
+                ),
+              );
             } else {
               showcategoryaddpopup(context);
             }

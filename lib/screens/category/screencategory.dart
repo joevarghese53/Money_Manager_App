@@ -26,21 +26,20 @@ class _CategoryscreenState extends State<Categoryscreen>
     return Column(
       children: [
         TabBar(
-            controller: tabController,
-            labelColor: Colors.black,
-            unselectedLabelColor: Colors.grey,
-            tabs: const [
-              Tab(
-                text: 'INCOME',
-              ),
-              Tab(
-                text: 'EXPENSE',
-              )
-            ]),
+          controller: tabController,
+          labelColor: const Color.fromARGB(255, 255, 255, 255),
+          unselectedLabelColor: const Color.fromARGB(255, 255, 255, 255),
+          tabs: const [
+            Tab(text: 'INCOME'),
+            Tab(text: 'EXPENSE'),
+          ],
+        ),
         Expanded(
-            child: TabBarView(
-                controller: tabController,
-                children: const [Incomelist(), Expenselist()]))
+          child: TabBarView(
+            controller: tabController,
+            children: const [Incomelist(), Expenselist()],
+          ),
+        ),
       ],
     );
   }
