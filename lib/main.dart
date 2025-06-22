@@ -4,6 +4,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'models/category/categorymodel.dart';
 import 'models/transactions/transcationmodel.dart';
 import 'screens/home/screenhome.dart';
+import 'db/category/categorydbfunctions.dart';
 
 Future<void> main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,6 +18,10 @@ Future<void> main(List<String> args) async {
   if (!Hive.isAdapterRegistered(TransactionmodelAdapter().typeId)) {
     Hive.registerAdapter(TransactionmodelAdapter());
   }
+
+  // Ensure default categories are initialized
+  await Categoryfunctions.instance.ensureCategoriesInitialized();
+
   runApp(const MyApp());
 }
 

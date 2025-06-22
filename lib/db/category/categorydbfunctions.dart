@@ -17,6 +17,7 @@ class Categoryfunctions implements Categoryfunctionsab {
 
   factory Categoryfunctions() {
     final instance = Categoryfunctions._internal();
+    // Initialize default categories asynchronously
     instance._initializeDefaultCategories();
     return instance;
   }
@@ -111,8 +112,13 @@ class Categoryfunctions implements Categoryfunctionsab {
       }
     }
 
-    // Refresh the UI to show the categories
-    refreshui();
+    // Always refresh the UI to show categories
+    await refreshui();
+  }
+
+  // Public method to ensure categories are initialized
+  Future<void> ensureCategoriesInitialized() async {
+    await _initializeDefaultCategories();
   }
 
   @override
